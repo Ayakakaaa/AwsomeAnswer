@@ -1,0 +1,60 @@
+<h1>Question</h1>
+<h1><%= @question.title %></h1>
+<p><%= @question.body %></p>
+<p>Asked <%= time_ago_in_words(@question.created_at) %> ago</p>
+<p>Last edited <%= time_ago_in_words(@question.updated_at) %></p>
+<small> <%= pluralize(@question.view_count,"time") %></small><br/>
+    <% if can? :destroy, @question %>
+        <%= link_to("Delete", question_path(@question), method: :delete, data:{confirm:'Are you sure?' }) %>
+        <br />
+    <% end %>
+<% if can? :edit, @question %>
+    <%= link_to 'Edit', edit_question_path(@question.id)%>
+<% end %>
+
+<section>
+<h1>Answers</h1>
+
+<%= form_with(model: [@question, @new_answer], local: true) do |f| %>
+    <% if @new_answer.errors.present? %>
+        <p class="form-errors">
+            <%= @new_answer.errors.full_messages.join(", ") %>
+        </p>
+    <% end %>
+    <div class="form-group">
+        <%= f.text_area(
+            :body,
+            cols: 50,
+            rows: 3,
+            placeholder:"What are your thoughts?",
+            class: "form-control"
+        ) %>
+    </div>
+
+    <%= f.submit 'Answer' %>
+<% end %>
+
+<hr>
+<ul class="answer-list">
+    <% @answers.each do |answer| %>
+        <li>
+            <%= answer.body %> <br>
+            <% if can? :crud, answer %>
+                <small>
+                    <%= link_to(
+                        "Delete",
+                        question_answer_path(@question,answer),
+                        method: :delete,
+                        data:{
+                            confirm: "Are you sure?"
+                        }
+                    ) %>
+                </small>
+            <% end %>
+            <small>
+                Answered <%= time_ago_in_words(answer.created_at) %> ago 
+            </small>
+        </li>
+    <% end %>
+</ul>
+</section>
