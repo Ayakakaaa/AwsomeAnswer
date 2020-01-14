@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_many :job_posts, dependent: :destroy
 
     has_many :questions, dependent: :nullify
     has_many :answers, dependent: :nullify

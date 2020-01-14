@@ -31,7 +31,7 @@
       <%=link_to('Contact Us', contacts_new_path)%>
     </nav>
 
-    <% flash[:notice] || flash[:alert]%>
+    <%= flash[:notice] || flash[:alert]%>
     <%= yield %>
   </body>
 </html>
