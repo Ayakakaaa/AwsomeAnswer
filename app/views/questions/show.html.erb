@@ -11,7 +11,21 @@
 <% if can? :update, @question %>
     <%= link_to 'Edit', edit_question_path(@question.id)%>
 <% end %>
-
+<br>
+<% if @like.present? && can?(:destroy, @like) %>
+    <%=link_to(
+        "Unlike",
+        like_path(@like),
+        method: :delete
+    )%> |
+<% elsif can?(:like, @question) %>
+    <%=link_to(
+        "Like",
+        question_likes_path(@question),
+        method: :post
+    )%> |
+<% end %>
+<small><%= pluralize(@question.likes.count, "like") %></small>
 <section>
 <h1>Answers</h1>
 

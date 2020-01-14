@@ -48,11 +48,16 @@ class QuestionsController < ApplicationController
         # it will skip validations, skip callbacks and not update `updated_at`.
         # Unless, you have a very good reason to use this DO NOT USE IT.
         @question.update_columns(view_count: @question.view_count+1) 
+        @like = @question.likes.find_by(user: current_user)
     end
 
     def destroy
         @question.destroy
         redirect_to questions_path
+    end
+
+    def liked
+        @questions = current_user.liked_questions.order('likes.created_at DESC')
     end
 
 

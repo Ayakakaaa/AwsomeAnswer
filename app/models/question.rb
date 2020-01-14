@@ -16,6 +16,12 @@ class Question < ApplicationRecord
   # ALWAYS SET A DEPENDENT OPTION TO HELP MAINTAIN REFERENTIAL 
   # INTEGRITY 
   has_many(:answers, dependent: :destroy)
+  has_many :likes, dependent: :destroy
+  # The `has_many` below is dependent on the existence of 
+  # `has_many :likes` above. If the above doesn't exist then you 
+  # will get an error (if the one above comes after you will 
+  # also get an error) 
+  has_many :likers, through: :likes, source: :user 
 
   # has_many :answers adds the following instance methods
   # to the question model:

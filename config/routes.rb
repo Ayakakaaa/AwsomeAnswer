@@ -32,6 +32,29 @@ Rails.application.routes.draw do
 
     resources :answers, only: [:create, :destroy]
     # resources :answers, except: [:new, :edit, :update, :index, :show]
+    # the shallow: true named argument will seperate 
+    # routes that require the parent from those that don't 
+    # Routes that require the parent (e.g. index, new, create) won't change (They will still be prefixed 
+    # with /questions/:question_id )
+    # Routes that don't require the parent (e.g. show, edit,
+    # update, destroy) will have the parent prefix removed. 
+    # Example: 
+    # /questions/10/likes/9/edit becomes /likes/9/edit
+    resources :likes, shallow: true, only: [ :create, :destroy]
+    # resources :answers, except: [:new, :edit, :update, :index, :show]
+    # Use the `on:` named argument to specify how a nested 
+    # route will behave relative to its parent. 
+
+    # `on: :collection` means that it acts on the entire 
+    # resource. All questions in this case. 
+    # new and create act on collection 
+    
+    # `on: :member` means that it acts on single resource. 
+    # A single question in this case. edit, update, destroy
+    # show are member routes  
+    get :liked, on: :collection
+
+
   end
 
   get '/contacts/new', to: 'contacts#new'
@@ -42,5 +65,7 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
 
   resources :job_posts
+
+
   
 end

@@ -3,6 +3,13 @@ class User < ApplicationRecord
 
     has_many :questions, dependent: :nullify
     has_many :answers, dependent: :nullify
+    has_many :likes, dependent: :destroy 
+    # To fix this we can give the association a different name
+    # and specify the `source` option so that Rails will be able to 
+    # figure out what the other end of the association actually refers to
+    # Note: `source` has to match a belongs_to association statement 
+    # in the join model (`like` in this case).
+    has_many :liked_questions, through: :likes, source: :question
 
     validates :email, presence: true, uniqueness: true,
     format: /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
