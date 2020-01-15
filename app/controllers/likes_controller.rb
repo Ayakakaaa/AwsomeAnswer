@@ -37,7 +37,7 @@ class LikesController < ApplicationController
         unless can?(:like, @question)
             flash[:danger] = "Don't be a narcissist"
             redirect_to question_path(@question)
-        end
+        end 
     end
 
 end
