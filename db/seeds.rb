@@ -25,10 +25,12 @@
 #         end
 #     end
 # end
-
+Tag.delete_all
+Like.delete_all
 Answer.delete_all
 Question.delete_all
 User.delete_all
+
 
 PASSWORD = "supersecret"  
 
@@ -55,6 +57,14 @@ users = User.all
 puts Cowsay.say("Created #{users.count} users", :tux)
 puts Cowsay.say("Login with #{super_user.email} and password of '#{PASSWORD}'", :cow)
 
+20.times do 
+    Tag.create(
+        name: Faker::Book.genre
+    )
+end
+
+tags = Tag.all
+
 200.times do
     user = users.sample
     q = Question.create(
@@ -72,13 +82,17 @@ puts Cowsay.say("Login with #{super_user.email} and password of '#{PASSWORD}'", 
                 user_id: user.id
             })
         end
-    else
-        puts "Invalid question!!"
-        p q
+        q.likers = users.shuffle.slice(0, rand(users.count))
+        q.tags = tags.shuffle.slice(0, rand(tags.count))
+    # else
+    #     puts "Invalid question!!"
+    #     p q
     end
     
 end
 
 puts Cowsay.say("Generated #{Question.count} questions", :frogs)
 puts Cowsay.say("Generated #{Answer.count} answers", :ghostbusters)
+puts Cowsay.say("Generated #{Like.count} likes", :kitty)
+puts Cowsay.say("Generated #{Tag.count} tags", :dragon)
 

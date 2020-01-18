@@ -23,6 +23,12 @@ class Question < ApplicationRecord
   # also get an error) 
   has_many :likers, through: :likes, source: :user 
 
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings#, source: :tag
+  # If the name of the association is the same as the 
+  # as the source singularized (i.e. tag), the :source 
+  # named argument can be omitted. 
+
   # has_many :answers adds the following instance methods
   # to the question model:
   # answers
@@ -85,6 +91,24 @@ class Question < ApplicationRecord
   # lifecycle. (i.e. being validated, saved, updated etc.). These methods take a symbol named after a method and calls that method at the appropriate time
   before_validation :capitalize_title #before saving a record, execute the capitalize_title method
   before_validation :set_default_view_count
+
+  # Getter
+  def tag_names 
+    self.tags.map{ |t| t.name }.join(", ")
+  end
+
+  # Appending `=` at the end of a method name, allows us to imolement 
+  # a setter. 
+  # Example: q.tag_names = "fiction,horror"
+  
+  def tag_names=(rhs) 
+    self.tags = rhs.strip.split(/\s*,\s*/).map do |tag_name|
+      # Finds the first record with the given attributes, OR 
+      # initializes a record (Tag.new) with the given attributes 
+      # if one is not found. 
+      Tag.find_or_initialize_by(name: tag_name)
+    end
+  end
 
   
   private

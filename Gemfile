@@ -28,6 +28,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cancancan'
 gem 'bootstrap', '~> 4.4.1'
+gem 'selectize-rails'
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
 
 
 group :development, :test do
@@ -51,6 +54,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'cowsay'
   gem 'hirb', '~> 0.7.3'
+  gem 'letter_opener'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

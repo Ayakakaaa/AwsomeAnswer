@@ -9,6 +9,10 @@ require("channels")
 
 import 'bootstrap'
 import './questions'
+import './selectize'
+
+window.jQuery = $;
+window.$ = $;
 
 $(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip()

@@ -65,7 +65,11 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
 
   resources :job_posts
-
-
-  
+  match(
+    "/delayed_job",
+    to: DelayedJobWeb,
+    anchor: false,
+    via: [:get, :post]
+  )
+ 
 end

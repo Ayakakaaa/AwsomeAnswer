@@ -6,6 +6,7 @@ class AnswersController < ApplicationController
         @new_answer.user = current_user
         @new_answer.question = @question
         if @new_answer.save
+            AnswerMailer.new_answer(@new_answer).deliver_later
             redirect_to question_path(@question)
         else
             @answers = @question.answers.order(created_at: :desc)
