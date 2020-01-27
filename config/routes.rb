@@ -54,6 +54,8 @@ Rails.application.routes.draw do
     # show are member routes  
     get :liked, on: :collection
 
+    reso
+
 
   end
 
@@ -65,6 +67,23 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
 
   resources :job_posts
+
+  # The namespace method in Rails routes makes it so 
+  # it will automatically look in a directory api, then 
+  # in a directory v1 for QuestionsController.
+
+  # The option `defaults: { format: :json }` will
+  namespace :api, defaults: { format: :json } do 
+    # /api...
+    namespace :v1 do 
+      # /api/v1...
+      resources :questions
+        #/api/v1/questions
+        resource :session, only: [:create, :destroy]
+        #/api/v1/session  
+    end
+  end
+
   match(
     "/delayed_job",
     to: DelayedJobWeb,

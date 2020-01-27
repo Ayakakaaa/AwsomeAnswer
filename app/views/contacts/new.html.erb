@@ -1,3 +1,4 @@
+<div class = "box">
 <%= form_with(url: contacts_path, local: true) do %>
     <div>
         <%= label_tag :name %>
@@ -9,8 +10,9 @@
     </div>
     <div>
         <%= label_tag :message %>
-        <%= text_area_tag :message%>
+        <%= text_field_tag :message%>
     </div>
     <%= submit_tag 'Contact Us' %>
 
 <% end %>
+</div>

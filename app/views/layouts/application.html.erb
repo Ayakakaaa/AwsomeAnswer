@@ -7,12 +7,14 @@
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
   </head>
 
   <body>
-    <nav>
+    <nav class = "navbar">
+    <div>
       <% if user_signed_in? %>
-        Hello <%= current_user.full_name %>,
+        Hello <strong><%= current_user.full_name %></strong>,
         <%= link_to "Logout", session_path, method: :delete,
           data: {confirm: "Are you sure you want to log out?"} %>
           |
@@ -21,9 +23,8 @@
         <%= link_to "Login", new_session_path %> |
         <%= link_to "Sign Up", new_user_path %>
       <% end %>
-
-      <hr>
-   
+    </div>
+    <div>
       <%=link_to('Home', root_path)%>
        |
       <%=link_to('All Questions', questions_path)%>
@@ -31,6 +32,7 @@
       <%=link_to('New Questions', new_question_path)%>
        |
       <%=link_to('Contact Us', contacts_new_path)%>
+    </div>
     </nav>
     <p>
     <%#= flash[:notice] || flash[:alert]%>

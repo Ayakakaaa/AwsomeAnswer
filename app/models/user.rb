@@ -33,6 +33,6 @@ class User < ApplicationRecord
     #   identical to the `password` accessor.
 
     def full_name
-        "#{first_name} #{last_name}" 
+        "#{first_name} #{last_name}".strip.squeeze
     end
 end
