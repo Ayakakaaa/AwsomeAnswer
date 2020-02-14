@@ -32,6 +32,8 @@ gem 'selectize-rails'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
 gem 'active_model_serializers'
+gem 'rack-cors'
+
 
 
 group :development, :test do
@@ -56,6 +58,7 @@ group :development do
   gem 'cowsay'
   gem 'hirb', '~> 0.7.3'
   gem 'letter_opener'
+  gem 'rails-erd'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

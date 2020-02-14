@@ -15,6 +15,8 @@ class QuestionSerializer < ActiveModel::Serializer
   belongs_to :user, key: :author
   has_many :answers
 
+
+
   # You can create methods inside the serializer to include
   # custom data in the json serialization. When doing so 
   # make sure to include the name of the method in the 

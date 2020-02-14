@@ -13,7 +13,7 @@ class LikesController < ApplicationController
         redirect_to @question
         # the above is the same as: 
         # `redirect_to question_path(@question)`
-    end
+    end 
 
     def destroy
         # like = Like.find params[:id]

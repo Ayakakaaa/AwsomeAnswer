@@ -32,6 +32,25 @@ class User < ApplicationRecord
     #   If it is present, a validation will verify that it is
     #   identical to the `password` accessor.
 
+
+
+    # To learn more about ActiveStorage, go to:
+    # https://edgeguides.rubyonrails.org/active_storage_overview.html
+
+      # To Setup attachments or uploads, first generate
+    # a migration to create tables needed by 
+    # ActiveStorage:
+    # rails active_storage:install
+
+    # Then, run your migration
+
+    # To Support multiple file attachments, do:
+    # has_many_attached(:avatars)
+    # To support a single file attachemnt, do:
+    has_one_attached(:avatar)
+
+
+
     def full_name
         "#{first_name} #{last_name}".strip.squeeze
     end

@@ -53,16 +53,12 @@ Rails.application.routes.draw do
     # A single question in this case. edit, update, destroy
     # show are member routes  
     get :liked, on: :collection
-
-    reso
-
-
   end
 
   get '/contacts/new', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
 
   resource :session, only: [:new, :create, :destroy]
 
@@ -78,9 +74,15 @@ Rails.application.routes.draw do
     namespace :v1 do 
       # /api/v1...
       resources :questions
-        #/api/v1/questions
-        resource :session, only: [:create, :destroy]
-        #/api/v1/session  
+      #/api/v1/questions
+      resource :session, only: [:create, :destroy]
+      #/api/v1/session 
+      resources :users, only: [:create, :update] do
+        #api/v1/users/current
+        get :current, on: :collection 
+        #default
+        #api/v1/users/:id/current
+      end
     end
   end
 

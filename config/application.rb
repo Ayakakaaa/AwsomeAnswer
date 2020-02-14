@@ -39,5 +39,19 @@ module AwesomeAnswers
       g.helper = false
       g.assets = false
     end
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins('localhost:5500', "127.0.0.1:5500", "127.0.0.1")
+        #allow access to only paths that begin with /api/
+        resource '/api/*', 
+        #this allows all HTTP headers to be sent
+        headers: :any,
+        # Allows sharing of cookies for CORS requests made to this resource 
+        credentials: true, 
+        # define the HTTP verbs which are allowed in a request
+        methods: [:get, :post, :delete, :patch, :put, :options]
+      end
+    end
   end
 end

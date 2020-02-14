@@ -137,7 +137,7 @@ class Question < ApplicationRecord
     end
   end
 
-    def set_default_view_count
+  def set_default_view_count
     # If you are writing to an attribute accessor,
     # you must prefix with self, which you don't have
     # to do if you are just reading it.
