@@ -33,6 +33,10 @@ gem 'delayed_job_active_record'
 gem 'delayed_job_web'
 gem 'active_model_serializers'
 gem 'rack-cors'
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'omniauth-github'
 
 
 

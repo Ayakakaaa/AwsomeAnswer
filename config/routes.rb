@@ -62,6 +62,10 @@ Rails.application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
 
+  get "/auth/github", as: :sign_in_with_github
+  get "/auth/:provider/callback", to: "callbacks#index"
+
+
   resources :job_posts
 
   # The namespace method in Rails routes makes it so 
